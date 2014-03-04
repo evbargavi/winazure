@@ -18,8 +18,8 @@
 	$selection	= mysql_select_db($db, $connection);
 	if(!$selection)
 		die('Db selection failed..');
-	die();
-	$sql		= "SELECT query";
+
+	$sql		= "SELECT * from member";
 	echo '<br>====='.$sql;
 	$sql_qry	= mysql_query($sql);
 	echo '<br>====='.$sql_qry;
