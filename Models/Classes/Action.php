@@ -40,6 +40,7 @@
 											 '".$inputs['email']."',
 											 '".$inputs['password']."'
 											 )";
+			echo '<br>====='.$query;die();
 			$result = $this->dbConnect->insertInto($query);  //Executing the insert query			
 			return $result;
 		}
@@ -79,6 +80,7 @@
 		}	
 		
 		function sendRegistrationMail($name,$to){
+							
 			$headers  		= "MIME-Version: 1.0\n";
 			$headers       .= "Content-Type: text/html; charset=iso-8859-1";
 			$headers       .= "Content-Transfer-Encoding: 8bit\n";
@@ -90,6 +92,7 @@
 			$filecontent	 = "<br>Welcome ".$name."<br><br>";
 			$filecontent	.="<br>You have registered successfully.";
 			mail($email,$subject,$filecontent,$headers);
+			
 		}
 	}
 	
