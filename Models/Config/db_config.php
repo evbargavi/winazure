@@ -16,9 +16,10 @@ if ($_SERVER['HTTP_HOST'] == '172.21.4.100') { // Local
 	$dbConfig['dataBase'] = 'Register';
 }
 else { //server
-	$dbConfig['hostName'] = '';
-	$dbConfig['userName'] = '';
-	$dbConfig['passWord'] = '';
-	$dbConfig['dataBase'] = '';
+//Database=ithamordbuser;Data Source=ap-cdbr-azure-east-b.cloudapp.net;User Id=bd01484a438cc9;Password=416b6dfa
+ $dbConfig['hostName'] = 'ap-cdbr-azure-east-b.cloudapp.net';
+ $dbConfig['userName'] = 'bd01484a438cc9';
+ $dbConfig['passWord'] = '416b6dfa';
+ $dbConfig['dataBase'] = 'ithamordbuser';
 }
 ?>
