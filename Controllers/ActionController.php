@@ -3,9 +3,12 @@ require('Models/Classes/Action.php');
 if(isset($_SESSION["go"]) && $_SESSION["go"]=='register')
 {
 	unset($_SESSION["go"]);
+	if($_POST['dob'] != '')
+		$bdate=date("Y-m-d", strtotime($_POST['dob']));
+	else
+		$bdate = '';
 	
-	$bdate=date("Y-m-d", strtotime($_POST['dob']));
-	$user_input = array('username'=>$_POST["username"],'password'=>$_POST['password'],'fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'email'=>$_POST['email'],'cnumber'=>$_POST['cnumber'],
+	$user_input = array('email'=>$_POST['email'],'password'=>$_POST['password'],'fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'cnumber'=>$_POST['cnumber'],
 						'address1'=>$_POST['address1'],'address2'=>$_POST['address2'],'city'=>$_POST['city'],'country'=>$_POST['country'],'pcode'=>$_POST['pcode'],'region'=>$_POST['region'],
 						'dob'=>$bdate);
 	$_SESSION['email']=	$_POST['email'];

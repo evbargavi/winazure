@@ -5,8 +5,7 @@
 		function showList($id)
 		{
 			$query="select * from member where member_id ='".$id."'";
-			$result = $this->dbConnect->sqlQueryArray($query);
-			
+			$result = $this->dbConnect->sqlQueryArray($query);			
 			return $result;
 		}	
 		function checkEmail($email)
@@ -19,28 +18,67 @@
 		
 		function makeCheck($uid,$pass)
 		{
-			$query="select * from member where email='".$uid."' and password='".$pass."'";			
+			$query="select * from member where email='".$uid."' and acc_password='".$pass."'";			
 			$result = $this->dbConnect->sqlQueryArray($query);
 			return $result;
 		}
 		
 		function makeInsert($inputs)
-		{				
-			$query = "insert into member(first_name,last_name,address1,address2,city,postalcode,region,country,dob,contact_number,email,password) Values
-											('".$inputs['fname']."',
-											 '".$inputs['lname']."',
-											 '".$inputs['address1']."',
-											 '".$inputs['address2']."',
-											 '".$inputs['city']."',
-											 '".$inputs['pcode']."',
-											 '".$inputs['region']."',
-											 '".$inputs['country']."',
-											 '".$inputs['dob']."',
-											 '".$inputs['cnumber']."',
-											 '".$inputs['email']."',
-											 '".$inputs['password']."'
-											 )";
-			echo '<br>====='.$query;die();
+		{					
+			$query = 'insert into member(';
+			
+			$tabfields = '';
+			$value = '';
+			if($inputs['email'] != '') {
+				$tabfields = 'email,';
+				$value = "'".$inputs['email']."',";
+			}
+			if($inputs['fname'] != '') {
+				$tabfields .= 'first_name,';
+				$value .= "'".$inputs['fname']."',";
+			}
+			if($inputs['lname'] != '') {
+				$tabfields .= 'last_name,';
+				$value .= "'".$inputs['lname']."',";
+			}
+			if($inputs['address1'] != '') {
+				$tabfields .= 'address1,';
+				$value .= "'".$inputs['address1']."',";
+			}
+			if($inputs['address2'] != '') {
+				$tabfields .= 'address2,';
+				$value .= "'".$inputs['address2']."',";
+			}
+			if($inputs['city'] != '') {
+				$tabfields .= 'city,';
+				$value .= "'".$inputs['city']."',";
+			}
+			if($inputs['pcode'] != '') {
+				$tabfields .= 'postalcode,';
+				$value .= "'".$inputs['pcode']."',";
+			}
+			if($inputs['region'] != '') {
+				$tabfields .= 'region,';
+				$value .= "'".$inputs['region']."',";
+			}
+			if($inputs['country'] != '') {
+				$tabfields .= 'country,';
+				$value .= "'".$inputs['country']."',";
+			}
+			if($inputs['dob'] != '') {
+				$tabfields.= 'dob,';
+				$value .= "'".$inputs['dob']."',";
+			}
+			if($inputs['cnumber'] != '') {
+				$tabfields .= 'contact_number,';
+				$value .= "'".$inputs['cnumber']."',";
+			}			
+			if($inputs['password'] != '') {
+				$tabfields .= 'acc_password,';
+				$value .= "'".$inputs['password']."',";
+			}
+				
+			$query = 'insert into member('.rtrim($tabfields, ",").') Values('.rtrim($value, ",").')';								
 			$result = $this->dbConnect->insertInto($query);  //Executing the insert query			
 			return $result;
 		}
@@ -74,7 +112,6 @@
 		function selectId()
 		{	
 			$query="select member_id from member where member_id=(SELECT max(member_id) FROM member)";	
-			echo $query;		
 			$result = $this->dbConnect->sqlQueryArray($query);
 			return $result;		
 		}	
@@ -90,8 +127,8 @@
 			$email			= $to;
 			$subject 		= "Registration";
 			$filecontent	 = "<br>Welcome ".$name."<br><br>";
-			$filecontent	.="<br>You have registered successfully.";
-			mail($email,$subject,$filecontent,$headers);
+			$filecontent	.="<br>You have registered successfully.";		
+			mail($email,$subject,$filecontent,$headers);		
 			
 		}
 	}

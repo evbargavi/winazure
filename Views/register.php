@@ -2,6 +2,8 @@
 <head><title>Registration</title>
 <script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>	
+<script language="JavaScript" type="text/javascript" src="WebResources/Scripts/zebra_datepicker.js"></script>
+<link type="text/css" rel="STYLESHEET" href="WebResources/Styles/css/default.css">
 <style>
 				body{
 					font-family:Arial,Helvetica,sans-serif;
@@ -43,12 +45,12 @@
 				<td valign="middle" align="center" height="100%">
 <form action="index.php?con=Action&go=register" method="post" onsubmit="return registercheck();" name="register" id="register" enctype="multipart/form-data">
 	<div class="register">
-	<table border="0" align="center">
-		<tr><td colspan="3" align="left"><a href="index.php">Back</a> </td></tr>
+	<table border="0" align="center">		
 		<tr>
 			<td colspan="3" align="center"><h1>Registration Form</h1></td>
 		</tr>
-		<tr><td colspan="3"><div id="error" style="color:red;height:20px" >
+		<tr><td colspan="3" align="right"><font style="color:brown;font-size:14px;"><b>* Mandatory Fields</b></font></td>
+		<tr><td colspan="3" align="center"><div id="error" style="color:red;height:20px;font-size:12px;" >
 		<?php  
 		if(isset($_SESSION['eerror'])) {
 			echo $_SESSION['eerror'];
@@ -57,20 +59,29 @@
 		?>
 		</div></td></tr>
 		<tr>
+			<td colspan="3"><b>Account Information:</b></td>			
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
 			<td>Email </td>
 			<td>&nbsp;:&nbsp;</td>
-			<td><input type="Text" name="email" id="email" class="input"></td>
+			<td><input type="Text" name="email" id="email" class="input"><font style="color:brown">&nbsp*</font></td>
 		</tr>
 		<tr>
 			<td>Password </td>
 			<td>&nbsp;:&nbsp;</td>
-			<td><input type="Password" name="password" id="password" class="input"></td>
+			<td><input type="Password" name="password" id="password" class="input"><font style="color:brown">&nbsp*</font></td>
 		</tr>
 		<tr>
 			<td>Confirm Password </td>
 			<td>&nbsp;:&nbsp;</td>
-			<td><input type="Password" name="con_password" id="con_password" class="input"></td>
+			<td><input type="Password" name="con_password" id="con_password" class="input"><font style="color:brown">&nbsp*</font></td>
 		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td colspan="3"><b>Personal Information:</b></td>			
+		</tr>
+		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td>First name</td>
 			<td>&nbsp;:&nbsp;</td>
@@ -80,17 +91,27 @@
 			<td>Last name</td>
 			<td>&nbsp;:&nbsp;</td>
 			<td><input type="Text" name="lname" id="lname" class="input"></td>
-		</tr>		
-		<tr>
-			<td>Contact Number</td>
-			<td>&nbsp;:&nbsp;</td>
-			<td><input type="Text" name="cnumber" id="cnumber" class="input"></td>
 		</tr>	
 		<tr>
 			<td>Date of Birth</td>
 			<td>&nbsp;:&nbsp;</td>
-			<td><div style="font-size:12px;"><input type="Text" name="dob" id="dob" class="input">eg: 01-01-1991</div></td>
+			<td><input type="Text" name="dob" id="dob" class="input"></td>
 		</tr>
+		<script>
+			$(function() { 
+				$('#dob').Zebra_DatePicker({ readonly_element : false, format: 'd-m-Y'});
+			});																		
+		</script>	
+		<tr>
+			<td>Upload Photo</td>
+			<td>&nbsp;:&nbsp;</td>
+			<td><input type="file" name="file" id='file' value="No file choosen" onchange="validation()" /> <div style="font-size:12px;">(.jpg, .jpeg, .gif, .png - 2mb)</div></td>
+		</tr>	
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td colspan="3"><b>Contact Information:</b></td>			
+		</tr>	
+		<tr><td>&nbsp;</td></tr>		
 		<tr>
 			<td>Address1</td>
 			<td>&nbsp;:&nbsp;</td>
@@ -121,14 +142,15 @@
 			<td>Country</td>
 			<td>&nbsp;:&nbsp;</td>
 			<td><input type="Text" name="country" id="country" class="input"></td>
-		</tr>
+		</tr>	
 		<tr>
-			<td>Upload Photo</td>
+			<td>Contact Number</td>
 			<td>&nbsp;:&nbsp;</td>
-			<td><input type="file" name="file" id='file' value="No file choosen" onchange="validation()" /> <div style="font-size:12px;">(.jpg, .jpeg, .gif, .png - 2mb)</div></td>
-		</tr>			
+			<td><input type="Text" name="cnumber" id="cnumber" class="input"></td>
+		</tr>	
+		<tr><td>&nbsp;</td></tr>		
 		<tr>
-			<td colspan="3"><center><input type="Submit" name="submit" class="submit" alt="Register" title="Register" value="Register"></center></td>
+			<td colspan="3"><center><input type="Submit" name="submit" class="submit" alt="Register" title="Register" value="Register">&nbsp;&nbsp;&nbsp;&nbsp;<input type="Button" name="submit" class="submit" alt="Back" title="Back" value="Back" onclick="return back();"></center></td>
 		</tr>	
 	</table>	
 	</div>

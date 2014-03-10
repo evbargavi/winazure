@@ -161,3 +161,10 @@
 		else
 			return true;
 	}
+	
+	function back()
+	{		
+		window.location.assign("index.php");
+	}
+	
+	
