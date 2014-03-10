@@ -101,7 +101,8 @@
 			$name=$id.$name;	
 			$extget = explode('.',$name);
 			$ext = $this->getImageType($extget[1]);
-			move_uploaded_file($tempname,"WebResources/Styles/images/upload/".$name);
+			
+			move_uploaded_file($tempname,$_SERVER['DOCUMENT_ROOT']."/WebResources/Styles/images/upload/".$name);
 			$query="update member set image_type = ".$ext." where member_id='".$id."'";
 			$result = $this->dbConnect->updateInto($query);
 			if($result)
@@ -127,8 +128,8 @@
 			$email			= $to;
 			$subject 		= "Registration";
 			$filecontent	 = "<br>Welcome ".$name."<br><br>";
-			$filecontent	.="<br>You have registered successfully.";		
-			mail($email,$subject,$filecontent,$headers);		
+			$filecontent	.="<br>You have registered successfully.";
+			mail($email,$subject,$filecontent,$headers);
 			
 		}
 	}
