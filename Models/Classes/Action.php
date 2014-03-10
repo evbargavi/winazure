@@ -78,7 +78,8 @@
 				$value .= "'".$inputs['password']."',";
 			}
 				
-			$query = 'insert into member('.rtrim($tabfields, ",").') Values('.rtrim($value, ",").')';								
+			$query = 'insert into member('.rtrim($tabfields, ",").') Values('.rtrim($value, ",").')';
+			echo "<br/>==".__LINE__."====>". $query ."<====<br/>";die();
 			$result = $this->dbConnect->insertInto($query);  //Executing the insert query			
 			return $result;
 		}
