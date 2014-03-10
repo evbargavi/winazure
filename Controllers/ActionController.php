@@ -94,4 +94,8 @@ else if(isset($_SESSION["go"]) && $_SESSION["go"]=='login_check')
 		header("Location:index.php");
 	}
 }
-
+else if(isset($_SESSION["go"]) && $_SESSION["go"]=='logout')
+{
+	unset($_SESSION["go"]);
+	header("Location:index.php");
+}
