@@ -43,7 +43,7 @@
 			<tr>
 				<td valign="middle" align="center" height="100%">					
 						<div class="userInfo">
-						<p align="right"><a href="index.php">Logout</a></p>
+						<p align="right"><a href="index.php?con=Action&go=logout">Logout</a></p>
 <table border="0" align="center">
 
 <?php
@@ -67,13 +67,33 @@
 	if(count($data)>=1) {
 	foreach($data as $values)
 	{
-	$bdate=date("d-m-Y", strtotime($values->dob));
+	
+		$bdate=date("d-m-Y", strtotime($values->dob));
 ?>
 		
 		<tr>
 			<td colspan="3" align="center"><h1 style="font-size:25px;">Welcome <?php echo $values->first_name;?></h1></td>
 		</tr>	
-		<tr style="height:20px;"></tr>	
+		<tr>
+			<td colspan="3"><b>Account Information:</b></td>			
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<?php		
+			if($values->email != '')  {
+		?>
+		<tr>
+			<td>Email </td>
+			<td align="center" >:</td>
+			<td><?php echo $values->email;?></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<?php
+		}
+		?>
+		<tr>
+			<td colspan="3"><b>Personal Information:</b></td>			
+		</tr>
+		<tr><td>&nbsp;</td></tr>		
 		<?php
 			if($values->first_name != '')  {
 		?>
@@ -82,9 +102,9 @@
 			<td align="center" >:</td>
 			<td><?php echo $values->first_name;?></td>
 		</tr>
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
-		}
+			}
 			if($values->last_name != '')  {
 		?>
 		<tr >
@@ -92,29 +112,9 @@
 			<td align="center" >:</td>
 			<td><?php echo $values->last_name;?></td>
 		</tr>
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
-		}
-			if($values->email != '')  {
-		?>
-		<tr>
-			<td>Email </td>
-			<td align="center" >:</td>
-			<td><?php echo $values->email;?></td>
-		</tr>
-		<tr></tr>
-		<?php
-		}
-			if($values->contact_number != 0)  {
-		?>
-		<tr>
-			<td>Contact Number</td>
-			<td align="center" >:</td>
-			<td><?php echo $values->contact_number;?></td>
-		</tr>	
-		<tr></tr>
-		<?php
-		}
+			}
 			if($bdate != '01-01-1970')  {
 		?>
 		<tr>
@@ -122,9 +122,24 @@
 			<td align="center" >:</td>
 			<td><?php echo $bdate;?></td>
 		</tr>
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
-		}
+			}
+			if($values->image_type != 0)  {
+		?>
+		<tr>
+			<td>Photo</td>
+			<td align="center" >&nbsp;:&nbsp;</td>
+			<td><img src='<?php echo SITE_PATH.'/WebResources/Styles/images/upload/'.$values->member_id.'.'.getImageExtension($values->image_type);?>' width="100" height="100"/></td>
+		</tr><?php
+		}			
+		?>	
+		<tr><td>&nbsp;</td></tr>	
+		<tr>
+			<td colspan="3"><b>Contact Information:</b></td>			
+		</tr>	
+		<tr><td>&nbsp;</td></tr>	
+		<?php		
 			if($values->address1 != '')  {
 		?>
 		<tr>
@@ -132,7 +147,7 @@
 			<td align="center" >:</td>
 			<td><?php echo $values->address1;?></td>
 		</tr>	
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
 		}
 			if($values->address2 != '')  {
@@ -142,27 +157,17 @@
 			<td align="center" >:</td>
 			<td><?php echo $values->address2;?></td>
 		</tr>		
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
 		}
-			if($values->city != '')  {
+		if($values->city != '')  {
 		?>
 		<tr>
 			<td>City</td>
 			<td align="center" >:</td>
 			<td><?php echo $values->city;?></td>
 		</tr>	
-		<tr></tr>
-		<?php
-		}
-			if($values->country != '')  {
-		?>
-		<tr>
-			<td>Country</td>
-			<td align="center" >:</td>
-			<td><?php echo $values->country;?></td>
-		</tr>
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
 		}
 			if($values->postalcode != 0)  {
@@ -172,7 +177,7 @@
 			<td align="center" >:</td>
 			<td><?php echo $values->postalcode;?></td>
 		</tr>
-		<tr></tr>
+		<tr><td>&nbsp;</td></tr>
 		<?php
 		}
 			if($values->region != '')  {
@@ -181,21 +186,31 @@
 			<td>Region</td>
 			<td align="center" >&nbsp;:&nbsp;</td>
 			<td><?php echo $values->region;?></td>
-		</tr><?php
-		}	if($values->image_type != 0)  {
+		</tr>
+		<tr><td>&nbsp;</td></tr><?php
+		}
+			if($values->country != '')  {
 		?>
 		<tr>
-			<td>Photo</td>
-			<td align="center" >&nbsp;:&nbsp;</td>
-			<td><img src='<?php echo SITE_PATH.'/WebResources/Styles/images/upload/'.$values->member_id.'.'.getImageExtension($values->image_type);?>' width="100" height="100"/></td>
-		</tr><?php
-		}			
-		?>			
-		
-				
-<?php 
-	}
-} else {?>
+			<td>Country</td>
+			<td align="center" >:</td>
+			<td><?php echo $values->country;?></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<?php
+		}	
+		if($values->contact_number != 0)  {
+		?>
+		<tr>
+			<td>Contact Number</td>
+			<td align="center" >:</td>
+			<td><?php echo $values->contact_number;?></td>
+		</tr>	
+		<tr><td>&nbsp;</td></tr>
+		<?php
+		}	
+	} 
+}else {?>
 </td>No Data Found</tr>
 <?php }?>
 	</table>	
