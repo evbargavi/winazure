@@ -8,7 +8,7 @@
 		require_once('Controllers/'.$_GET['con'].'Controller.php');
 		die();
 	}		
-	if( (isset($_GET['page'])) && ($_GET['page'] != '') && (file_exists('Views/'.$_GET['page'].'.php')) ){		
+	if( (isset($_GET['page'])) && ($_GET['page'] != '') && (file_exists('Views/'.$_GET['page'].'.php')) ){
 		require_once('Views/'.$_GET['page'].'.php');
 		die();
 	}
@@ -18,42 +18,7 @@
 		<title>Login</title>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>
-		<style>
-				body{
-					font-family:Arial,Helvetica,sans-serif;
-					background:#909ebc;
-				}
-				#user_login{
-					 left: 50%;
-				     margin-top: 10%;
-				}
-				.login{
-					background:#DAE4FB;
-					border: 4px solid #424242;
-				    border-radius: 7px;
-				    box-shadow: 0 0 5px #DEDEDE;
-				    color: #333333;
-				    display: block;
-				    margin: auto;
-				    padding: 20px;
-				    width: 450px;
-				}
-				input.submit{background:none;border:none;cursor : pointer;}
-				.submit{
-					background:#424242!important;
-					padding:5px 10px;
-					color:#fff;
-					 border: 1px solid #FFFFFF !important;
-				}
-				.input{
-					background: none repeat scroll 0 0 #FFFFFF;
-					border: 1px solid #424242;
-					padding: 3px 5px;
-				}
-				a{color:#424242;
-				text-decoration:underline;
-				font-size: 13px;}
-			</style>
+		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">		
 	</head>
 	<body>
 	<div id="login_form">
@@ -68,13 +33,16 @@
 								<td colspan="3" align="center"><h1 style="font-size:25px;">Login</h1></td>
 							</tr>
 							<tr><td height="10"></td></tr>
-							<tr><td align="center" colspan="3"><div id="result" style="color:red;">
-											<?php if($_SESSION['logerror']) {
-													echo $_SESSION['logerror'];
-													unset($_SESSION['logerror']);
-												}
-											?>
-										</div>
+							<tr>
+								<td align="center" colspan="3">
+									<div id="result" style="color:red;">
+										<?php 
+											if($_SESSION['logerror']) {
+												echo $_SESSION['logerror'];
+												unset($_SESSION['logerror']);
+											}
+										?>
+									</div>
 								</td>
 							</tr>
 							<tr><td colspan="3" height="20"></td></tr>
@@ -99,8 +67,7 @@
 									<input type="submit" value="Submit" class="submit" title="Submit" alt="Submit" name="admin_login_submit" id="admin_login_submit"/>&nbsp&nbsp&nbsp
 									<a href="index.php?page=register" title="Register" alt="Register" class="forget_pw">Register</a>
 								</td>
-							</tr>
-									
+							</tr>									
 						</table>
 						</div>
 					</form>

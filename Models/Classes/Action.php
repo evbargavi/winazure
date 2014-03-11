@@ -5,20 +5,20 @@
 		function showList($id)
 		{
 			$query="select * from member where member_id ='".$id."'";
-			$result = $this->dbConnect->sqlQueryArray($query);			
+			$result = $this->dbConnect->sqlQueryArray($query);
+			
 			return $result;
 		}	
 		function checkEmail($email)
 		{
 			$query="select * from member where email ='".$email."'";
 			$result = $this->dbConnect->sqlQueryArray($query);
-			
 			return $result;
 		}	
 		
 		function makeCheck($uid,$pass)
 		{
-			$query="select * from member where email='".$uid."' and acc_password='".$pass."'";			
+			$query="select * from member where email='".$uid."' and acc_password='".$pass."'";
 			$result = $this->dbConnect->sqlQueryArray($query);
 			return $result;
 		}
@@ -112,7 +112,7 @@
 		}	
 		function selectId()
 		{	
-			$query="select member_id from member where member_id=(SELECT max(member_id) FROM member)";	
+			$query="select member_id from member where member_id=(SELECT max(member_id) FROM member)";
 			$result = $this->dbConnect->sqlQueryArray($query);
 			return $result;		
 		}	
@@ -129,7 +129,7 @@
 			$subject 		= "Registration";
 			$filecontent	 = "<br>Welcome ".$name."<br><br>";
 			$filecontent	.="<br>You have registered successfully.";
-			mail($email,$subject,$filecontent,$headers);
+			mail($email,$subject,$filecontent,$headers);		
 			
 		}
 	}
