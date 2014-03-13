@@ -1,14 +1,17 @@
  <?php 	
 	session_start();
 	require('Includes/CommonIncludes.php');	
+	
 	if(isset($_GET['go']))	 
-		$_SESSION['go'] = $_GET['go'];		
+		$_SESSION['go'] = $_GET['go'];
+	if(isset($_GET['pageno']))	 
+		$_SESSION['pageno'] = $_GET['pageno'];
 	if( (isset($_GET['con'])) && ($_GET['con'] != '') )
 	{
 		require_once('Controllers/'.$_GET['con'].'Controller.php');
 		die();
 	}		
-	if( (isset($_GET['page'])) && ($_GET['page'] != '') && (file_exists('Views/'.$_GET['page'].'.php')) ){
+	if( (isset($_GET['page'])) && ($_GET['page'] != '') && (file_exists('Views/'.$_GET['page'].'.php')) ){		
 		require_once('Views/'.$_GET['page'].'.php');
 		die();
 	}

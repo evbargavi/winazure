@@ -1,18 +1,38 @@
 <?php
-
 	class Action
 	{
 		function showList($id)
-		{
+		{			
 			$query="select * from member where member_id ='".$id."'";
+			$result = $this->dbConnect->sqlQueryArray($query);			
+			return $result;
+		}
+		function getList($filterquery,$limitquery)
+		{	
+			$query="select SQL_CALC_FOUND_ROWS * from member";
+			if(!empty($filterquery))
+				$query .= $filterquery;
+			
+			$query .= ' order by member_id desc';
+			
+			if(!empty($limitquery))
+				$query .= $limitquery;
+			
+			//echo $query;
+			
 			$result = $this->dbConnect->sqlQueryArray($query);
 			
+			$data = mysql_query("SELECT FOUND_ROWS() as totalCount");
+			$totrows = mysql_fetch_array($data);
+			$_SESSION['totrows'] = $totrows['totalCount'];
+			//unset($_SESSION['filter']);
 			return $result;
 		}	
 		function checkEmail($email)
 		{
 			$query="select * from member where email ='".$email."'";
 			$result = $this->dbConnect->sqlQueryArray($query);
+			
 			return $result;
 		}	
 		
@@ -82,6 +102,39 @@
 			$result = $this->dbConnect->insertInto($query);  //Executing the insert query
 			return $result;
 		}
+		
+		function makeUpdate($inputs)
+		{
+			$uval='';
+						
+			if($inputs['fname'] != '') 
+				$uval .= "first_name='".$inputs['fname']."', ";
+			if($inputs['lname'] != '') 
+				$uval.= "last_name='".$inputs['lname']."', ";
+			if($inputs['address1'] != '') 
+				$uval.="address1='".$inputs['address1']."', ";
+			if($inputs['address2'] != '')
+				$uval.="address2='".$inputs['address2']."', ";
+			if($inputs['city'] != '') 
+				$uval.="city='".$inputs['city']."', ";
+			if($inputs['pcode'] != '')
+				$uval.="postalcode='".$inputs['pcode']."', ";
+			if($inputs['region'] != '')
+				$uval.="region='".$inputs['region']."', ";
+			if($inputs['country'] != '')
+				$uval.="country='".$inputs['country']."', ";
+			if($inputs['dob'] != '')
+				$uval.="dob='".$inputs['dob']."', ";
+			if($inputs['cnumber'] != '') 
+				$uval.="contact_number='".$inputs['cnumber']."', ";		
+			//echo substr($uval, 0, -2)."<br>";			
+			$query = 'update member set '.substr($uval, 0, -2)." where member_id='".$_SESSION['updateid']."'";
+			//echo $query;
+			//die();
+			$result = $this->dbConnect->updateInto($query);  //Executing the insert query
+			return $result;
+		}
+		
 		function getImageType($extension){
 			$type = '';
 			if (($extension == 'pjpeg') or ($extension == 'jpeg'))
@@ -102,7 +155,7 @@
 			$extget = explode('.',$name);
 			$ext = $this->getImageType($extget[1]);
 			
-			move_uploaded_file($tempname,$_SERVER['DOCUMENT_ROOT']."/WebResources/Styles/images/upload/".$name);
+			move_uploaded_file($tempname,$_SERVER['DOCUMENT_ROOT']."/WebResources/Images/upload/".$name);
 			$query="update member set image_type = ".$ext." where member_id='".$id."'";
 			$result = $this->dbConnect->updateInto($query);
 			if($result)
@@ -115,10 +168,16 @@
 			$query="select member_id from member where member_id=(SELECT max(member_id) FROM member)";
 			$result = $this->dbConnect->sqlQueryArray($query);
 			return $result;		
-		}	
+		}
+		function userDelete($id) {
+			$query = "delete from member where member_id='".$id."'";
+			$result = $this->dbConnect->deleteInto($query);  
+			return $result;
+		}		
+		
 		
 		function sendRegistrationMail($name,$to){
-							
+			phpini_set("sendmail_from", "info@eventurers.com");
 			$headers  		= "MIME-Version: 1.0\n";
 			$headers       .= "Content-Type: text/html; charset=iso-8859-1";
 			$headers       .= "Content-Transfer-Encoding: 8bit\n";
@@ -130,7 +189,6 @@
 			$filecontent	 = "<br>Welcome ".$name."<br><br>";
 			$filecontent	.="<br>You have registered successfully.";
 			mail($email,$subject,$filecontent,$headers);		
-			
 		}
 	}
 	
