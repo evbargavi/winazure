@@ -1,3 +1,6 @@
+<?php
+	if(isset($_SESSION['check']) && !empty($_SESSION['check'])) {
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -9,12 +12,12 @@
 		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">		
 	</head>
 	<body>
-		<div id="info_form">
-					
+	<br>
+		<div id="info_form">					
 			<table align="center" cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" >									
 				<tr>
 					<td  align="center" height="90%">					
-						<div class="userInfo">	
+						<div class="register">	
 						<form action="index.php?con=Action&go=update" method="post" name="register" id="register" enctype="multipart/form-data">						
 							<table border="0" align="center">							
 							<?php							
@@ -42,37 +45,37 @@
 									$_SESSION['updateid']=$values->member_id;
 							?>								
 								<tr>
-									<td colspan="3"><b>Account Information:</b></td>			
+									<td colspan="3" style="padding-left:90px;"><b>Account Information:</b></td>			
 								</tr>
 								<tr><td>&nbsp;</td></tr>								
 								<tr>
-									<td>Email </td>
+									<td width='45%' style="padding-left:90px;">Email </td>
 									<td align="center" >:</td>
-									<td>
+									<td style="padding-left:30px;">
 										<?php echo $values->email;?>									
 									</td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td colspan="3"><b>Personal Information:</b></td>			
+									<td colspan="3" style="padding-left:90px;"><b>Personal Information:</b></td>			
 								</tr>									
 								<tr><td>&nbsp;</td></tr>	
 								<tr>
-									<td>First name</td>
+									<td width='45%' style="padding-left:90px;">First name</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="fname" id="fname" class="input" value="<?php echo $values->first_name;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="fname" id="fname" class="input" value="<?php echo $values->first_name;?>"></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr >
-									<td>Last name</td>
+									<td width='45%' style="padding-left:90px;">Last name</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="lname" id="lname" class="input" value="<?php echo $values->last_name;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="lname" id="lname" class="input" value="<?php echo $values->last_name;?>"></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Date of Birth</td>
+									<td width='45%' style="padding-left:90px;">Date of Birth</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="dob" id="dob" class="input" value="<?php echo $bdate;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="dob" id="dob" class="input" value="<?php echo $bdate;?>"></td>
 								</tr>	
 								<script>
 									$(function() { 
@@ -81,9 +84,9 @@
 								</script>								
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Photo</td>
+									<td width='45%' style="padding-left:90px;">Photo</td>
 									<td align="center" >&nbsp;:&nbsp;</td>
-									<td>
+									<td style="padding-left:30px;">
 									<?php
 										if($values->image_type != 0) {
 									?>
@@ -95,49 +98,49 @@
 								</tr>								
 								<tr><td height="5"></td></tr>	
 								<tr>
-									<td colspan="3"><b>Contact Information:</b></td>			
+									<td colspan="3" style="padding-left:90px;"><b>Contact Information:</b></td>			
 								</tr>				
 								<tr><td>&nbsp;</td></tr>
 								<tr>
-									<td>Address1</td>
+									<td width='45%' style="padding-left:90px;">Address1</td>
 									<td align="center" >:</td>
-									<td><textarea name="address1" id="address1" rows="3" cols="16" class="input"><?php echo $values->address1;?></textarea></td>
+									<td style="padding-left:30px;"><textarea name="address1" id="address1" rows="3" cols="16" class="input"><?php echo $values->address1;?></textarea></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Address2</td>
+									<td width='45%' style="padding-left:90px;">Address2</td>
 									<td align="center" >:</td>
-									<td><textarea name="address2" id="address2" rows="3" cols="16" class="input"><?php echo $values->address2;?></textarea></td>
+									<td style="padding-left:30px;"><textarea name="address2" id="address2" rows="3" cols="16" class="input"><?php echo $values->address2;?></textarea></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>City</td>
+									<td width='45%' style="padding-left:90px;">City</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="city" id="city" class="input" value="<?php echo $values->city;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="city" id="city" class="input" value="<?php echo $values->city;?>"></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Postal Code</td>
+									<td width='45%' style="padding-left:90px;">Postal Code</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="pcode" class="input" id="pcode" value="<?php echo $values->postalcode;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="pcode" class="input" id="pcode" value="<?php echo $values->postalcode;?>"></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Region</td>
+									<td width='45%' style="padding-left:90px;">Region</td>
 									<td align="center" >&nbsp;:&nbsp;</td>
-									<td><input type="Text" name="region" class="input" id="region" value="<?php echo $values->region;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="region" class="input" id="region" value="<?php echo $values->region;?>"></td>
 								</tr>									
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Country</td>
+									<td width='45%' style="padding-left:90px;">Country</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="country" id="country" class="input" value="<?php echo $values->country;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="country" id="country" class="input" value="<?php echo $values->country;?>"></td>
 								</tr>								
 								<tr><td height="5"></td></tr>
 								<tr>
-									<td>Contact Number</td>
+									<td width='45%' style="padding-left:90px;">Contact Number</td>
 									<td align="center" >:</td>
-									<td><input type="Text" name="cnumber" id="cnumber" class="input" value="<?php echo $values->contact_number;?>"></td>
+									<td style="padding-left:30px;"><input type="Text" name="cnumber" id="cnumber" class="input" value="<?php echo $values->contact_number;?>"></td>
 								</tr>								
 								<tr><td height="5"></td></tr>		
 								<tr>
@@ -157,3 +160,8 @@
 		</div>	
 	</body>
 </html>
+<?php 
+	}
+	else
+		header("Location:index.php");
+?>

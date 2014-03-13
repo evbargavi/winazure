@@ -115,19 +115,27 @@
 	}
 	
 	function call(id)
-	{
+	{	
 		page="index.php?page=listview&pageno="+id;			
 		$.get(page,function(data,status){
-	    $("#result").html(data); 
+			$('#result').hide();
+			$('#Loading').show();
+	    	$("#result").html(data); 
+			$('#Loading').hide();
+			$('#result').show();
 		});
 		return false;
 	}
 	
 	function setPageCookie(cookieName, cookieValue)
-	{    	
+	{ 		 	
 	   	document.cookie = cookieName+"="+escape(cookieValue);		
 		$.get("index.php?page=listview&pageno=1",function(data,status){
-	    $("#result").html(data); 
+	    	$('#result').hide();
+			$('#Loading').show();
+	    	$("#result").html(data); 
+			$('#Loading').hide();
+			$('#result').show(); 
 		});
 		return false;
 	}
@@ -147,7 +155,11 @@
 		{
 			var url='index.php?con=Action&go=multiuserdelete';		
 			$.post(url,{list:checked}, function(data,status){				
-				$("#result").html(data);    			
+				$('#result').hide();
+				$('#Loading').show();
+		    	$("#result").html(data); 
+				$('#Loading').hide();
+				$('#result').show();   			
 			});
 		}
 		return false;
@@ -161,7 +173,11 @@
 		if (choose==true){		
 			var url='index.php?con=Action&go=userdelete';		
 			$.post(url,{delid:id}, function(data,status){											
-				$("#result").html(data); 
+				$('#result').hide();
+				$('#Loading').show();
+		    	$("#result").html(data); 
+				$('#Loading').hide();
+				$('#result').show();
 			});					
 		}
 		return false;
@@ -172,7 +188,11 @@
 	{	
 		var email = $("#email").val();			
 		$.post("index.php?con=Action&go=filter",{email:email}, function(data,status){				
-			$("#result").html(data);	
+			$('#result').hide();
+			$('#Loading').show();
+	    	$("#result").html(data); 
+			$('#Loading').hide();
+			$('#result').show();	
 		});	
 		return false;
 	}

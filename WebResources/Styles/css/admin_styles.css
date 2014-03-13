@@ -92,13 +92,10 @@ input.order {
 	font:bold 16px trebuchet ms;
 }
 .submit,.submit_button {
-	cursor:pointer;
-	background:#424242;
-	padding:5px 8px;
+	background:#424242!important;
+	padding:5px 10px;
 	color:#fff;
-	font:bold 16px trebuchet ms;
-	border:1px solid #fff;
-	*padding:0 0;
+	border: 1px solid #FFFFFF !important;
 }
 .forget_pw {margin-left:15px;color:#333}
 .forget_pw:hover{text-decoration:underline;}
@@ -542,3 +539,4 @@ border:1px solid #CFCFCF
 	border:1px solid #939090;
 }
 .recor_txt{padding-top:4px;display:inline-block;}
+

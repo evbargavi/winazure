@@ -1,3 +1,6 @@
+<?php
+	if(isset($_SESSION['check']) && !empty($_SESSION['check'])) {
+?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
         <head>
@@ -7,7 +10,13 @@
 			<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>	
 			<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/admin_styles.css">			
 			<script language="JavaScript" type="text/javascript">
-				$(document).ready(function(){ $("#result").load("index.php?page=listview"); });//onload							
+				$(document).ready(function(){ 					
+					$('#result').hide();
+					$('#Loading').show();
+			    	$("#result").load("index.php?page=listview");
+					$('#Loading').hide();
+					$('#result').show();
+				});//onload							
 			</script>			
 		</head>		                              
 		<body>			
@@ -44,6 +53,10 @@
 						               	</tr>											
 						            </table>
 									<div id="result"></div>
+									<div id="Loading">
+										<br><br><br>
+										<p align="center"><img src="./WebResources/Styles/images/loader.gif" align="middle"/></p>
+									</div>									
 						        </div>
 						     </td>
 						</tr>
@@ -53,4 +66,8 @@
 		</table>				
 	</body>
 </html>
-
+<?php 
+	}
+	else
+		header("Location:index.php");
+?>

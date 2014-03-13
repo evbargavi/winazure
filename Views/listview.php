@@ -66,7 +66,7 @@
 			</td>
 		</tr>
 		<tr height="20"></tr>
-			<tr><td colspan="3" align="right"><font style="font-size:15px;">No. of User(s)&nbsp:&nbsp;<strong><?php echo $totalRows;?></strong></font></td></tr>
+			<tr><td colspan="3" align="right"><span class="recor_txt">No. of User(s)</span>&nbsp;:&nbsp;<strong><?php echo $totalRows;?></strong></td></tr>
 		<tr>
 			<td align="left" width="30%"><input type="submit" class="submit_button normal_font" name="Delete" value="Delete All" title="Delete" alt="Delete" onclick="return multiDelete();"></strong></td>
 				<td align="center">
@@ -137,7 +137,7 @@
 					<td  class="record" align="right" width="30%">
 					<span class="recor_txt">Per page &nbsp;</span>
 						<span class="fright">
-							<select name="per_page" style="width:80px;" onChange="setPageCookie('limit', this.value);">
+							<select name="per_page" onChange="setPageCookie('limit', this.value);">
 									<?php
 											$limitarr = array('5','10','50','100');
 											foreach($limitarr as $val1) {
@@ -220,7 +220,7 @@
 							<td align="center"><?php echo $data->member_id; ?></td>
 							<td align="left"><?php echo $data->email; ?></td>	
 							<?php
-								if(!empty($data->first_name) && !empty($data->last_name)) {
+								if(!empty($data->first_name) || !empty($data->last_name)) {
 							?>
 							<td align="left">
 							<?php 
@@ -257,7 +257,7 @@
 							<td align="center">-</td>
 							<?php 
 							}
-							if(!empty($data->city) && !empty($data->region) && !empty($data->postalcode) && !empty($data->country)) {
+							if(!empty($data->city) || !empty($data->region) || ($data->postalcode != 0) || !empty($data->country)) {
 							?>									
 							<td align="left" style="width:15%;word-wrap:break-word;">							
 							<?php 

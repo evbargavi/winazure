@@ -100,12 +100,12 @@
 									<tr>
 										<td>Address1</td>
 										<td>&nbsp;:&nbsp;</td>
-										<td><textarea name="address1" id="address1" rows="3" cols="16" class="input"></textarea></td>
+										<td><textarea name="address1" id="address1" rows="2" cols="16" class="input"></textarea></td>
 									</tr>	
 									<tr>
 										<td>Address2</td>
 										<td>&nbsp;:&nbsp;</td>
-										<td><textarea name="address2" id="address2" rows="3" cols="16" class="input"></textarea></td>
+										<td><textarea name="address2" id="address2" rows="2" cols="16" class="input"></textarea></td>
 									</tr>				
 									<tr>
 										<td>City</td>

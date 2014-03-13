@@ -1,3 +1,6 @@
+<?php
+	if(isset($_SESSION['check']) && !empty($_SESSION['check'])) {
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -11,7 +14,7 @@
 			<table align="center" cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" >					
 				<tr>
 					<td  align="center" height="100%">					
-						<div class="userInfo">							
+						<div class="register">							
 							<?php
 								if(isset($_SESSION['go']) && $_SESSION['go']=='view') {	
 							?>
@@ -210,3 +213,8 @@
 		</div>	
 	</body>
 </html>
+<?php 
+	}
+	else
+		header("Location:index.php");
+?>

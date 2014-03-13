@@ -8,12 +8,13 @@ if(isset($_SESSION["go"]) && $_SESSION["go"]=='register')
 	else
 		$bdate = '';
 	
-	$user_input = array('email'=>$_POST['email'],'password'=>$_POST['password'],'fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'cnumber'=>$_POST['cnumber'],
-						'address1'=>$_POST['address1'],'address2'=>$_POST['address2'],'city'=>$_POST['city'],'country'=>$_POST['country'],'pcode'=>$_POST['pcode'],'region'=>$_POST['region'],
-						'dob'=>$bdate);
+	$user_input = array('email'=>$_POST['email'],'password'=>$_POST['password'],'fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'cnumber'=>$_POST['cnumber'],'address1'=>$_POST['address1'],
+						'address2'=>$_POST['address2'],'city'=>$_POST['city'],'country'=>$_POST['country'],'pcode'=>$_POST['pcode'],'region'=>$_POST['region'],'dob'=>$bdate);
 	//$_SESSION['email']=	$_POST['email'];
+	$_SESSION['check']=$_POST["email"];
 	$data = $objregister->checkEmail($_POST['email']);
-	if(count($data)!=0) {	
+	if(count($data)!=0) {
+	
 		if (!empty($_FILES['file']['file'])) {
 			if ($_FILES["file"]["error"] > 0)
 		   		echo "<br>Return Code : <b> " . $_FILES["file"]["error"] . "</b><br>";
@@ -37,7 +38,6 @@ if(isset($_SESSION["go"]) && $_SESSION["go"]=='register')
 						$username = $_POST['lname'];
 					else
 						$username = '';
-					$_SESSION['check']=$_POST["email"];
 					$objregister->sendRegistrationMail($username,$_POST['email']);
 					header("Location:index.php?page=userInfo&id=".$row);
 				}
@@ -56,8 +56,7 @@ if(isset($_SESSION["go"]) && $_SESSION["go"]=='register')
 		$status =$objregister->makeInsert($user_input);
 		if($status=="true") {
 			$_SESSION['insstatus']="Data inserted Successfully";
-			//$_SESSION['email']=$user_input['email'];
-			$_SESSION['check']=$_POST["email"];
+			$_SESSION['email']=$user_input['email'];
 			echo "Data inserted Successfully";
 			$data=$objregister->selectID();
 			foreach($data as $values)
@@ -110,13 +109,12 @@ else if(isset($_SESSION["go"]) && $_SESSION["go"] == 'userdelete') {
 	unset($_SESSION['go']);	
 	header("Location:index.php?page=listview");
 }
-else if(isset($_SESSION['go']) && $_SESSION['go'] == 'multiuserdelete')//multi admin user delete
+else if(isset($_SESSION['go']) && $_SESSION['go'] == 'multiuserdelete')
 {		
 	$selectlist = $_POST['list'];
 	for($i=0;$i<count($selectlist);$i++)
 	{
 		$delid=$selectlist[$i];
-		//echo $delid;			
 		$status	= $objregister->userDelete($delid);
 	}
 	if($status == '1')
@@ -144,15 +142,14 @@ if(isset($_SESSION["go"]) && $_SESSION["go"]=='update')
 	else
 		$bdate = '';
 	
-	$user_input = array('fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'cnumber'=>$_POST['cnumber'],
-						'address1'=>$_POST['address1'],'address2'=>$_POST['address2'],'city'=>$_POST['city'],'country'=>$_POST['country'],'pcode'=>$_POST['pcode'],'region'=>$_POST['region'],
-						'dob'=>$bdate);	
+	$user_input = array('fname'=>$_POST['fname'],'lname'=>$_POST['lname'],'cnumber'=>$_POST['cnumber'],'address1'=>$_POST['address1'],'address2'=>$_POST['address2'],
+						'city'=>$_POST['city'],'country'=>$_POST['country'],'pcode'=>$_POST['pcode'],'region'=>$_POST['region'],'dob'=>$bdate);	
 	
 		if (!empty($_FILES['file']['file'])) {
 			if ($_FILES["file"]["error"] > 0)
 		   		echo "<br>Return Code : <b> " . $_FILES["file"]["error"] . "</b><br>";
 			else
-			{		
+			{
 				$status =$objregister->makeUpdate($user_input);
 				if($status=="true") {
 					$_SESSION['status']="Updated Successfully";
@@ -166,11 +163,10 @@ if(isset($_SESSION["go"]) && $_SESSION["go"]=='update')
 		{
 			$status =$objregister->makeUpdate($user_input);
 			$row = $_SESSION['updateid'];
-			//$objregister->upload($_FILES["file"]["name"],$_FILES["file"]["tmp_name"] ,$row);
+			$objregister->upload($_FILES["file"]["name"],$_FILES["file"]["tmp_name"] ,$row);
 			if($status=="true") {
 				$_SESSION['status']="Updated Successfully";
 				header("Location:index.php?page=listing");
 			}
 		}
-		
 }
