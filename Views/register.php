@@ -1,7 +1,7 @@
 <html>
 	<head><title>Registration</title>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>	
+		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/user.js"></script>	
 		<script language="JavaScript" type="text/javascript" src="WebResources/Scripts/zebra_datepicker.js"></script>
 		<link type="text/css" rel="STYLESHEET" href="WebResources/Styles/css/default.css">
 		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">	
@@ -11,7 +11,7 @@
 			<table align="center" cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" >
 				<tr>
 					<td valign="middle" align="center" height="100%">
-						<form action="index.php?con=Action&go=register" method="post" onsubmit="return registercheck();" name="register" id="register" enctype="multipart/form-data">
+						<form action="index.php?con=User&go=register" method="post" onsubmit="return registercheck();" name="register" id="register" enctype="multipart/form-data">
 							<div class="register">
 								<table border="0" align="center">		
 									<tr>
@@ -45,22 +45,12 @@
 									<tr>
 										<td>Password </td>
 										<td>&nbsp;:&nbsp;</td>
-										<td><input type="Password" name="password" id="password" value="<?php 
-											if(isset($_SESSION['password'])) {
-												echo trim($_SESSION['password']); 
-												unset($_SESSION['password']);
-											}				
-										?>" class="input"><font style="color:brown">&nbsp*</font></td>
+										<td><input type="Password" name="password" id="password" value="" class="input"><font style="color:brown">&nbsp*</font></td>
 									</tr>
 									<tr>
 										<td>Confirm Password </td>
 										<td>&nbsp;:&nbsp;</td>
-										<td><input type="Password" name="con_password" id="con_password" value="<?php 
-										if(isset($_SESSION['con_password'])) {
-											echo trim($_SESSION['con_password']); 
-											unset($_SESSION['con_password']);
-										}			
-										?>" class="input"><font style="color:brown">&nbsp*</font></td>
+										<td><input type="Password" name="con_password" id="con_password" value="" class="input"><font style="color:brown">&nbsp*</font></td>
 									</tr>
 									<tr><td>&nbsp;</td></tr>
 									<tr>

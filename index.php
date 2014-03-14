@@ -2,8 +2,6 @@
 	session_start();
 	require('Includes/CommonIncludes.php');	
 	
-	if(isset($_GET['go']))	 
-		$_SESSION['go'] = $_GET['go'];
 	if(isset($_GET['pageno']))	 
 		$_SESSION['pageno'] = $_GET['pageno'];
 	if( (isset($_GET['con'])) && ($_GET['con'] != '') )
@@ -20,7 +18,7 @@
 	<head>
 		<title>Login</title>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>
+		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/user.js"></script>
 		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">		
 	</head>
 	<body>
@@ -28,7 +26,7 @@
 		<table align="center" cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" >
 			<tr>
 				<td valign="middle" align="center" height="100%">
-					<form action="index.php?con=Action&go=login_check" name="admin_login_form" id="admin_login_form"  method="post" onsubmit="return logincheck()">
+					<form action="index.php?con=User&go=login_check" name="admin_login_form" id="admin_login_form"  method="post" onsubmit="return logincheck()">
 						<div class="login">
 						<table align="center" cellpadding="0" cellspacing="0" border="0" width="450">
 							<tr><td colspan="3" height="5"></td></tr>
@@ -39,11 +37,13 @@
 							<tr>
 								<td align="center" colspan="3">
 									<div id="result" style="color:red;">
-										<?php 
-											if($_SESSION['logerror']) {
-												echo $_SESSION['logerror'];
-												unset($_SESSION['logerror']);
-											}
+										<?php if(isset($_GET['log']) && $_GET['log']==0)
+												echo "* Invalid Email or Password";											
+											
+											if(isset($_GET['msg']) && $_GET['msg']==1)	
+												echo "<font color='green'><b>Registration Successfull</b></font>";
+											else if(isset($_GET['msg']) && $_GET['msg']==0)
+												echo "Registartion fail try again";																	
 										?>
 									</div>
 								</td>

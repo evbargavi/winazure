@@ -1,10 +1,12 @@
-<?php if(isset($_SESSION['check']) && !empty($_SESSION['check'])) { ?>
+<?php
+	if(isset($_SESSION['check']) && !empty($_SESSION['check'])) {
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<title>User Information</title>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>
+		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/user.js"></script>
 		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">		
 	</head>
 	<body>
@@ -14,18 +16,21 @@
 					<td  align="center" height="100%">					
 						<div class="register">							
 							<?php
-								if(isset($_SESSION['go']) && $_SESSION['go']=='view') {	
+								if(isset($GET['go']) && $GET['go']=='view') {	
 							?>
-							<p align="left"><input type="Button" name="submit" class="submit" alt="Back" title="Back" value="Back" onclick="return backlist();"></p>
+							<p align="right"><input type="Button" name="submit" class="submit" alt="View List" title="View List" value="View List" onclick="return backlist();">&nbsp&nbsp<input type="Button" name="submit" class="submit" alt="logout" title="logout" value="Logout" onclick="return logout();"></p>
+							
+							
 							<?php							
 								}else {
 							?>
-							<p align="right"><input type="Button" name="submit" class="submit" alt="View List" title="View List" value="View List" onclick="return backlist();">&nbsp&nbsp<input type="Button" name="submit" class="submit" alt="logout" title="logout" value="Logout" onclick="return logout();"></p>
+							<p align="left"><input type="Button" name="submit" class="submit" alt="Back" title="Back" value="Back" onclick="return backlist();"></p>
 							<?php
 								}
 							?>
 							<table border="0" align="center">							
-							<?php require('Models/Classes/Action.php');
+							<?php							
+								require('Models/Classes/User.php');							
 								function getImageExtension($extension)
 								{
 									$type = '';
@@ -41,7 +46,8 @@
 								}
 								$data = $objregister->showList($_GET['id']);
 								if(count($data)>=1) {
-									foreach($data as $values){
+									foreach($data as $values)
+									{								
 										$_SESSION['userinfoid']=$values->member_id;
 										$bdate=date("d-m-Y", strtotime($values->dob));
 										if($bdate == '00-00-0000' || $bdate == '01-01-1970')
@@ -211,4 +217,8 @@
 		</div>	
 	</body>
 </html>
-<?php } else header("Location:index.php"); ?>
+<?php 
+	}
+	else
+		header("Location:index.php");
+?>

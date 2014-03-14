@@ -4,7 +4,7 @@
 <tr>
 <td colspan="2">
 <?php
-	require('Models/Classes/Action.php');	
+	require('Models/Classes/User.php');	
 	function getImageExtension($extension) {
 		$type = '';
 		if ($extension == '1')
@@ -212,8 +212,8 @@
 							foreach($val as $data)
 							{
 								$bdate = date("d-m-Y", strtotime($data->dob));
-								if($bdate == '00-00-0000' || $bdate == '01-01-1970')
-									$bdate = '';
+								if($bdate == '00-00-0000' || $bdate == '01-01-1970' || $bdate == '31-12-1969')
+									$bdate = ' - ';
 						?>
 						<tr>
 							<td align="center"><input name="checkdelete[]" value="<?php echo $data->member_id;?>" type="checkbox" class="cb-element"/></td>

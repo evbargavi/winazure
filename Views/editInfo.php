@@ -6,7 +6,7 @@
 	<head>
 		<title>User Information</title>
 		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>
+		<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/user.js"></script>
 		<script language="JavaScript" type="text/javascript" src="WebResources/Scripts/zebra_datepicker.js"></script>
 		<link type="text/css" rel="STYLESHEET" href="WebResources/Styles/css/default.css">
 		<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/register.css">		
@@ -18,10 +18,10 @@
 				<tr>
 					<td  align="center" height="90%">					
 						<div class="register">	
-						<form action="index.php?con=Action&go=update" method="post" name="register" id="register" enctype="multipart/form-data">						
+						<form action="index.php?con=User&go=update" method="post" name="register" id="register" enctype="multipart/form-data">						
 							<table border="0" align="center">							
 							<?php							
-								require('Models/Classes/Action.php');
+								require('Models/Classes/User.php');
 								function getImageExtension($extension)
 								{
 									$type = '';
@@ -39,10 +39,10 @@
 								if(count($data)>=1) {
 									foreach($data as $values)
 									{								
-									$bdate=date("d-m-Y", strtotime($values->dob));
-									if($bdate == '00-00-0000' || $bdate == '01-01-1970')
-									$bdate = '';
-									$_SESSION['updateid']=$values->member_id;
+										$bdate=date("d-m-Y", strtotime($values->dob));
+										if($bdate == '00-00-0000' || $bdate == '01-01-1970')
+											$bdate = '';
+										$_SESSION['updateid']=$values->member_id;
 							?>								
 								<tr>
 									<td colspan="3" style="padding-left:90px;"><b>Account Information:</b></td>			

@@ -7,7 +7,7 @@
             <title>Users List</title>	
 			<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 			<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/jquery-2.0.3.min.js"></script>
-			<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/Action.js"></script>	
+			<script language="JavaScript" type="text/javascript" src="./WebResources/Scripts/user.js"></script>	
 			<link rel="STYLESHEET" type="text/css" href="./WebResources/Styles/css/admin_styles.css">			
 			<script language="JavaScript" type="text/javascript">
 				$(document).ready(function(){ 					
