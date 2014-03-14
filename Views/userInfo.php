@@ -1,6 +1,4 @@
-<?php
-	if(isset($_SESSION['check']) && !empty($_SESSION['check'])) {
-?>
+<?php if(isset($_SESSION['check']) && !empty($_SESSION['check'])) { ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -27,8 +25,7 @@
 								}
 							?>
 							<table border="0" align="center">							
-							<?php							
-								require('Models/Classes/Action.php');							
+							<?php require('Models/Classes/Action.php');
 								function getImageExtension($extension)
 								{
 									$type = '';
@@ -44,10 +41,11 @@
 								}
 								$data = $objregister->showList($_GET['id']);
 								if(count($data)>=1) {
-									foreach($data as $values)
-									{								
+									foreach($data as $values){
 										$_SESSION['userinfoid']=$values->member_id;
-									$bdate=date("d-m-Y", strtotime($values->dob));
+										$bdate=date("d-m-Y", strtotime($values->dob));
+										if($bdate == '00-00-0000' || $bdate == '01-01-1970')
+											$bdate = '';
 							?>
 							<?php
 								if(isset($_SESSION['go']) && $_SESSION['go']=='view') {
@@ -74,7 +72,7 @@
 								</tr>		
 								<?php
 									}
-								if($values->first_name != '' || $values->last_name != '' || $bdate != '01-01-1970' || $values->image_type != 0) {
+								if($values->first_name != '' || $values->last_name != '' || $bdate != '' || $values->image_type != 0) {
 								?>
 								<tr><td height="5"></td></tr>
 								<tr>
@@ -101,7 +99,7 @@
 								</tr>		
 								<?php
 									}
-									if($bdate != '01-01-1970')  {
+									if($bdate != '')  {
 								?>
 								<tr><td height="5"></td></tr>
 								<tr>
@@ -213,8 +211,4 @@
 		</div>	
 	</body>
 </html>
-<?php 
-	}
-	else
-		header("Location:index.php");
-?>
+<?php } else header("Location:index.php"); ?>

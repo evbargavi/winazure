@@ -18,14 +18,11 @@
 			if(!empty($limitquery))
 				$query .= $limitquery;
 			
-			//echo $query;
-			
 			$result = $this->dbConnect->sqlQueryArray($query);
 			
 			$data = mysql_query("SELECT FOUND_ROWS() as totalCount");
 			$totrows = mysql_fetch_array($data);
 			$_SESSION['totrows'] = $totrows['totalCount'];
-			//unset($_SESSION['filter']);
 			return $result;
 		}	
 		function checkEmail($email)
@@ -89,6 +86,10 @@
 				$tabfields.= 'dob,';
 				$value .= "'".$inputs['dob']."',";
 			}
+			else {
+				$tabfields.= 'dob,';
+				$value .= "'0000-00-00',";
+			}
 			if($inputs['cnumber'] != '') {
 				$tabfields .= 'contact_number,';
 				$value .= "'".$inputs['cnumber']."',";
@@ -125,12 +126,11 @@
 				$uval.="country='".$inputs['country']."', ";
 			if($inputs['dob'] != '')
 				$uval.="dob='".$inputs['dob']."', ";
-			if($inputs['cnumber'] != '') 
+			else
+				$uval.="dob='0000-00-00', ";
+			if($inputs['cnumber'] != '')
 				$uval.="contact_number='".$inputs['cnumber']."', ";		
-			//echo substr($uval, 0, -2)."<br>";			
 			$query = 'update member set '.substr($uval, 0, -2)." where member_id='".$_SESSION['updateid']."'";
-			//echo $query;
-			//die();
 			$result = $this->dbConnect->updateInto($query);  //Executing the insert query
 			return $result;
 		}
@@ -154,7 +154,8 @@
 			$name=$id.$name;	
 			$extget = explode('.',$name);
 			$ext = $this->getImageType($extget[1]);
-			
+			if($ext == '')
+				$ext = 0;
 			move_uploaded_file($tempname,$_SERVER['DOCUMENT_ROOT']."/WebResources/Images/upload/".$name);
 			$query="update member set image_type = ".$ext." where member_id='".$id."'";
 			$result = $this->dbConnect->updateInto($query);
