@@ -4,7 +4,7 @@
 	$items = array();
 	
 	$con=dbselect();
-	$query="SELECT * FROM member WHERE first_name like '".$searchkey."%' OR last_name like '".$searchkey."%' OR email like '".$searchkey."%'";	
+	$query="SELECT * FROM member WHERE first_name like '%".$searchkey."%' OR last_name like '%".$searchkey."%' OR email like '%".$searchkey."%'";	
 	$result=mysql_query($query,$con);
 	if(mysql_num_rows($result)>0){
 		$items = array();
