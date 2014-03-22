@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+        <head>
+            <title>Accessing mobile services</title>	
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+			<link rel="stylesheet" href="lib/css/styles.css" />
+			<link rel="stylesheet" href="lib/css/jquery.autocomplete.css" type="text/css" />
+			<meta name='viewport' content='width=device-width' />				
+			<script language="JavaScript" type="text/javascript" src="lib/js/jquery.js"></script>
+			<script language="JavaScript" type="text/javascript" src="lib/js/jquery.autocomplete.js"></script>		
+		</head>		                              
+		<body style="background-color:#DEDEDE">
+			<div id='wrapper'>
+				<article>
+					<header>
+						<h1>Search auto complete.</h1>
+					</header>
+					<div style="background-color:#FFFFFF">
+					 <form>
+		                 <table align="center" cellpadding="0" cellspacing="0" border="0" width="99%">	
+							<tr><td height="30"></td></tr>
+							<tr height="20">																			
+								<td style="padding-left:17px;color:#005200;" width="35%"><label>Keyword to search user</label></td>
+								<td align="left" style="padding-right:10px;style="color:#7A5200;"" width="5%">:</td>
+								<td align="left" width="60%">	
+									<input type="text" list="mytext"  value="" id="text_data" class="ac_input" size="50"/>							
+								</td>																										
+							</tr>
+							<tr><td height="30"></td></tr>														
+						 </table>
+					  </form>	
+					  </div>
+					 
+				</article>
+				  <div id="result"></div>
+			</div>
+			  <script type="text/javascript">
+			  		function selectItem(li){
+						var sValue = li.selectValue;
+						sValue = sValue.replace(/(<([^>]+)>)/ig,"");
+						var sValue1 = sValue.split(' ; ');
+						var email = sValue1[sValue1.length-1];
+						$("#text_data").val(sValue);
+						$.post("userInfo.php?go=info", {email: email}, function(data){
+							$("#result").html(data);
+						});
+					}
+				    $("#text_data").autocomplete(
+				      "autocomplete.php",
+				      {
+				  			delay:10,
+				  			minChars:3,
+				  			matchSubset:1,
+				  			matchContains:1,
+				  			cacheLength:10,
+				  			onItemSelect:selectItem,
+				  			autoFill:false
+				  		}
+				    );	
+			</script>                   			
+		</body>
+	</html>
+
